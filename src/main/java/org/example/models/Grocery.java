@@ -55,8 +55,7 @@ public class Grocery {
                 System.out.println("Çıkarılmasını istediğiniz elemanı veya elemanları giriniz (örnek: apple veya apple, banana, cherry):");
                 String items = console.nextLine();
                 removeItems(items);
-            } else if (x == 3) {
-                printSorted();
+
             } else {
                 System.out.println("Geçersiz giriş! Lütfen 0, 1, 2 veya 3 giriniz.");
             }
