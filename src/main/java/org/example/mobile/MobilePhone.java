@@ -3,71 +3,86 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MobilePhone {
-    private String myNumber;
-    private ArrayList<Contact> myContacts;
+private String myNumber;
 
-    public MobilePhone(String myNumber, List<Contact> contacts) {
-        this.myNumber = myNumber;
-        this.myContacts = new ArrayList<>(contacts); // Listeyi kopyalayarak başlatıyoruz
-    }
+private List<Contact> myContacts;
+
 
 
     public String getMyNumber() {
         return myNumber;
     }
 
-    public ArrayList<Contact> getMyContacts() {
+    public void setMyNumber(String myNumber) {
+        this.myNumber = myNumber;
+    }
+
+    public List<Contact> getMyContacts() {
         return myContacts;
     }
 
+    public void setMyContacts(List<Contact> myContacts) {
+        this.myContacts = myContacts;
+    }
+
+    public MobilePhone(String myNumber, List<Contact> myContacts) {
+        this.myNumber = myNumber;
+        this.myContacts = myContacts;
+    }
+
     public boolean addNewContact(Contact contact) {
-        if (findContact(contact.getName()) != -1) {
+        if (contact == null || contact.getName() == null || contact.getPhoneNumber() == null) {
             return false;
         }
-        myContacts.add(contact);
-        return true;
-    }
+        if (findContact(contact.getName()) > 0) {
+            return false;
+        }
 
-    public boolean updateContact(Contact oldContact, Contact newContact) {
-        int foundPosition = findContact(oldContact);
-        if (foundPosition == -1) {
-            return false;
-        }
-        myContacts.set(foundPosition, newContact);
-        return true;
-    }
-
-    public boolean removeContact(Contact contact) {
-        int foundPosition = findContact(contact);
-        if (foundPosition == -1) {
-            return false;
-        }
-        myContacts.remove(foundPosition);
-        return true;
+        return this.myContacts.add(contact);
     }
 
     public int findContact(Contact contact) {
-        return myContacts.indexOf(contact);
+        return this.myContacts.indexOf(contact);
     }
 
     public int findContact(String name) {
-        for (int i = 0; i < myContacts.size(); i++) {
-            if (myContacts.get(i).getName().equals(name)) {
+        for (int i = 0; i<myContacts.size() ; i++) {
+            Contact contact = myContacts.get(i);
+            if (contact.getName().equalsIgnoreCase(name)); {
                 return i;
             }
         }
         return -1;
     }
 
-    public Contact queryContact(String name) {
-        int position = findContact(name);
-        return (position != -1) ? myContacts.get(position) : null;
+    public boolean updateContact(Contact oldContact, Contact newContact) {
+        int index = findContact((oldContact));
+        if (index<=0) {
+            return false;
+        }
+        this.myContacts.set(index, newContact);
+        return true;
+    }
+
+    public boolean removeContact(Contact contact){
+        if (contact==null || findContact(contact) < 0) {
+            return false;
+        }
+        return this.myContacts.remove(contact);
+    }
+
+    public Contact queryContact(String contactName) {
+        int contactIndex = findContact(contactName);
+        if (contactIndex <0) {
+            return null;
+        }
+        return this.myContacts.get(contactIndex);
     }
 
     public void printContacts() {
-        System.out.println("Contact List:");
-        for (Contact contact : myContacts) {
-            System.out.println(contact.getName() + " -> " + contact.getPhoneNumber());
+        for (int i=0; i<myContacts.size(); i++) {
+            Contact contact = myContacts.get(i);
+            System.out.print((i+1) + ". " + contact.getName() + " -> " + contact.getPhoneNumber());
         }
     }
 }
