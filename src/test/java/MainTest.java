@@ -31,7 +31,7 @@ public class MainTest {
     public void testAddItemsMethod() throws NoSuchFieldException {
         Grocery.groceryList.add("tomato");
         Grocery.addItems("lemon");
-        Grocery.addItems("cherry,artichoke");
+        Grocery.addItems("cherry, artichoke");
 
         assertEquals(Grocery.groceryList.size(), 4);
         assertEquals(Grocery.groceryList.contains("lemon"), true);
@@ -44,8 +44,8 @@ public class MainTest {
     public void testAddItemsWithSameValues() throws NoSuchFieldException {
         Grocery.groceryList.add("tomato");
         Grocery.addItems("tomato");
-        Grocery.addItems("cherry,artichoke");
-        Grocery.addItems("cherry,potato");
+        Grocery.addItems("cherry, artichoke");
+        Grocery.addItems("cherry, potato");
 
         assertEquals(Grocery.groceryList.size(), 4);
     }
@@ -55,8 +55,8 @@ public class MainTest {
     public void testAddItemsSorted()  {
         Grocery.groceryList.add("tomato");
         Grocery.addItems("tomato");
-        Grocery.addItems("cherry,artichoke");
-        Grocery.addItems("cherry,potato");
+        Grocery.addItems("cherry, artichoke");
+        Grocery.addItems("cherry, potato");
 
         assertEquals(Grocery.groceryList.get(0), "artichoke");
     }
@@ -73,7 +73,7 @@ public class MainTest {
         assertEquals(Grocery.groceryList.size(), 3);
         assertEquals(Grocery.groceryList.contains("cherry"), false);
 
-        Grocery.removeItems("lemon,banana");
+        Grocery.removeItems("lemon, banana");
         assertEquals(Grocery.groceryList.size(), 1);
         assertEquals(Grocery.groceryList.contains("lemon"), false);
         assertEquals(Grocery.groceryList.contains("banana"), false);
