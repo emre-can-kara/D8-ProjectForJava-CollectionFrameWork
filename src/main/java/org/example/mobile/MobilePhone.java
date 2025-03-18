@@ -13,17 +13,11 @@ private List<Contact> myContacts;
         return myNumber;
     }
 
-    public void setMyNumber(String myNumber) {
-        this.myNumber = myNumber;
-    }
 
     public List<Contact> getMyContacts() {
         return myContacts;
     }
 
-    public void setMyContacts(List<Contact> myContacts) {
-        this.myContacts = myContacts;
-    }
 
     public MobilePhone(String myNumber, List<Contact> myContacts) {
         this.myNumber = myNumber;
@@ -46,9 +40,9 @@ private List<Contact> myContacts;
     }
 
     public int findContact(String name) {
-        for (int i = 0; i<myContacts.size() ; i++) {
+        for (int i = 0; i<myContacts.size(); i++) {
             Contact contact = myContacts.get(i);
-            if (contact.getName().equalsIgnoreCase(name)); {
+            if (contact.getName().equalsIgnoreCase(name)) {
                 return i;
             }
         }
@@ -73,7 +67,7 @@ private List<Contact> myContacts;
 
     public Contact queryContact(String contactName) {
         int contactIndex = findContact(contactName);
-        if (contactIndex <0) {
+        if (contactIndex < 0) {
             return null;
         }
         return this.myContacts.get(contactIndex);
